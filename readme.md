@@ -14,3 +14,9 @@ $ curl localhost:8080/user/me -H "Authorization: Bearer fd131318-357a-48da-af82-
 
 **simple oauth client
 browse https://rta-center.pakgon.com:8443 will automatically redirect to facebook for login / authorization
+
+Spring Boot attaches a special meaning to a WebSecurityConfigurer on the class that carries the @EnableOAuth2Sso annotation: 
+it uses it to configure the security filter chain that carries the OAuth2 authentication processor. 
+So all we need to do to make our home page visible is to explicitly authorizeRequests() to the home page 
+and the static resources it contains (we also include access to the login endpoints which handle the 
+authentication). All other requests (e.g. to the /user endpoint) require authentication.
